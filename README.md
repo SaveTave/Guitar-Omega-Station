@@ -3,7 +3,7 @@
 **La Workstation Definitiva per la Teoria della Chitarra.**
 *Nessun framework, nessuna dipendenza pesante, pura potenza HTML, CSS e JavaScript.*
 
-[**🚀 PROVALO ORA (LIVE DEMO)**](https://savetave.github.io/Harmonica-Omega/))
+[**🚀 PROVALO ORA (LIVE DEMO)**](https://savetave.github.io/Harmonica-Omega/)
 ## ⚡ Descrizione
 **Guitar Omega Station** è una Single-Page Application (SPA) ultra-leggera progettata per chitarristi, compositori e studenti di teoria musicale.
 A differenza dei software tradizionali, questa applicazione visualizza scale, modi e accordi su una tastiera virtuale a 24 tasti in tempo reale, completa di un motore audio sintetizzato e strumenti di analisi teorica avanzata.
