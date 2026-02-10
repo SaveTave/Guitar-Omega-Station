@@ -1,3 +1,6 @@
+
+# Nuova Versione:
+**Aggiunti Arpeggi**
 # 🎸 Guitar Omega Station
 
 **La Workstation Definitiva per la Teoria della Chitarra.**
