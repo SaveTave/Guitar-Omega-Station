@@ -143,6 +143,7 @@
                     <option value="blues">🎸 BLUES & ROCK</option>
                     <option value="exotic">🌍 ETNICHE / WORLD</option>
                     <option value="symm">📐 SIMMETRICHE</option>
+					<option value="arpeggi">🎹 ARPEGGI</option>
                 </select>
             </div>
             <div class="c-group">
@@ -283,7 +284,17 @@
         { id: "hungarian", name: "Ungherese Minore", genre: "exotic", intervals: [0,2,3,6,7,8,11], harm:"harmonic", desc: "Gitana." },
         { id: "double_harm", name: "Doppia Armonica", genre: "exotic", intervals: [0,1,4,5,7,8,11], harm:"major", desc: "Araba / Pulp Fiction." },
         { id: "hirajoshi", name: "Hirajoshi", genre: "exotic", intervals: [0,2,3,7,8], harm:"penta", desc: "Giapponese." },
-        { id: "neapolitan", name: "Napoletana Min", genre: "exotic", intervals: [0,1,3,5,7,8,11], harm:"minor", desc: "Minore Armonica con b2." }
+        { id: "neapolitan", name: "Napoletana Min", genre: "exotic", intervals: [0,1,3,5,7,8,11], harm:"minor", desc: "Minore Armonica con b2." },
+		{ name: "--- ARPEGGI ---", ints: [], harm: "" }, // Separatore nel menu
+    { id: "arp_maj", name: "Arpeggio Maggiore", genre: "arpeggi", intervals: [0, 4, 7], harm: "none", desc: "Triade Maggiore (R-3-5)." },
+    { id: "arp_min", name: "Arpeggio Minore", genre: "arpeggi", intervals: [0, 3, 7], harm: "none", desc: "Triade Minore (R-b3-5)." },
+    { id: "arp_dim", name: "Arpeggio Diminuito", genre: "arpeggi", intervals: [0, 3, 6], harm: "none", desc: "Triade Diminuita (R-b3-b5)." },
+    { id: "arp_aug", name: "Arpeggio Aumentato", genre: "arpeggi", intervals: [0, 4, 8], harm: "none", desc: "Triade Aumentata (R-3-#5)." },
+    { id: "arp_maj7", name: "Arpeggio Maj7", genre: "arpeggi", intervals: [0, 4, 7, 11], harm: "none", desc: "Accordo Major 7 (R-3-5-7)." },
+    { id: "arp_min7", name: "Arpeggio Min7", genre: "arpeggi", intervals: [0, 3, 7, 10], harm: "none", desc: "Accordo Minore 7 (R-b3-5-b7)." },
+    { id: "arp_dom7", name: "Arpeggio Dom7", genre: "arpeggi", intervals: [0, 4, 7, 10], harm: "none", desc: "Accordo Dominante (R-3-5-b7)." },
+    { id: "arp_m7b5", name: "Arpeggio m7b5", genre: "arpeggi", intervals: [0, 3, 6, 10], harm: "none", desc: "Semidiminuito (R-b3-b5-b7)." },
+    { id: "arp_dim7", name: "Arpeggio Dim7", genre: "arpeggi", intervals: [0, 3, 6, 9], harm: "none", desc: "Diminuito completo (R-b3-b5-bb7)." }
     ];
 
     // --- ACCORDI ---
@@ -474,6 +485,17 @@
 
     function renderHarmonization(root, scale) {
         const container = document.getElementById('harmGrid');
+        container.innerHTML = ""; 
+
+        // SE E' UN ARPEGGIO, ESCI SUBITO (COSI NON SI BLOCCA)
+        if (scale.intervals.length < 7 || scale.harm === "none") {
+            container.innerHTML = `<div style="grid-column: 1 / -1; color:#666; font-size:11px; padding:10px;">
+                Armonizzazione disponibile solo per scale a 7 note.
+            </div>`;
+            return;
+        }
+
+        // CODICE ORIGINALE v27 PER LE SCALE NORMALI
         const degrees = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
         let types = [];
         
@@ -490,7 +512,8 @@
             if(idx >= types.length) return;
             const n = notes[(notes.indexOf(root)+i)%12];
             const t = types[idx] || "";
-            html += `<div class="harm-btn" onclick="drawChordsInContainer('${n}', '${t}', 'chordContainer')">
+            // Usa la funzione originale drawChordsInContainer se presente, altrimenti adatta
+            html += `<div class="harm-btn" onclick="if(typeof drawChordsInContainer === 'function') drawChordsInContainer('${n}', '${t}', 'chordContainer')">
                         <span class="harm-degree">${degrees[idx]}</span> ${n}${t}
                      </div>`;
         });
