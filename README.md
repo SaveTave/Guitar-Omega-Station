@@ -44,6 +44,3 @@ Visita il link GitHub Pages (vedi sopra).
 
 ## 🤝 Contribuire
 Sentiti libero di fare un fork di questo progetto! Puoi aggiungere le tue scale preferite, accordature alternative o migliorare il motore audio.
-
-## 📜 Licenza
-MIT License - Libero di usare, modificare e distribuire.
